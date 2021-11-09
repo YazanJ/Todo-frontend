@@ -1,44 +1,29 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 import { View, Button } from 'react-native';
 import Note from './Note.js';
 import * as API from "../API.js";
 
-class CreateNote extends Component {
+const CreateNote = ({ username, refreshNotes }) => {
 
-    state = {
-        text: ''
-    }
+    const [text, setText] = useState('');
 
-    handleChange = (text) => {
-        this.setState({
-            text,
-        });
-    };
-
-    handleSubmit = (username, refreshNotes) => {
-        API.createNote(username, this.state.text)
+    const handleSubmit = () => {
+        API.createNote(username, text)
             .then(data => refreshNotes())
-        this.setState({
-            text: ''
-        });
+        setText('')
     }
-
-    render() {
-        const { username, refreshNotes } = this.props;
-        return (
-            <View>
-                <Note
-                    text={this.state.text}
-                    handleChange={this.handleChange}
-                />
-                <Button
-                    title='Submit'
-                    onPress={() => this.handleSubmit(username, refreshNotes)}
-                />
-            </View>
-        )
-    }
-
+    return (
+        <View>
+            <Note
+                text={text}
+                handleChange={setText}
+            />
+            <Button
+                title='Submit'
+                onPress={handleSubmit}
+            />
+        </View>
+    )
 }
 
 export default CreateNote;

@@ -1,9 +1,7 @@
 import React, { Component } from 'react';
 import { View, TextInput } from 'react-native';
 
-const Note = (props) => {
-
-    const { text, handleChange } = props;
+const Note = ({ text, handleChange }) => {
     return (
         <View>
             <TextInput
