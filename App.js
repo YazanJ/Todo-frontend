@@ -6,14 +6,15 @@ import Constants from 'expo-constants';
 
 const App = () => {
 
+  const [token, setToken] = useState(null);
   const [isAuthenticated, authenticate] = useState(false);
   const [username, updateUsername] = useState('');
 
   return (
     <View style={styles.container}>
       {isAuthenticated ?
-        <NotesPage username={username} /> :
-        <Login authenticate={authenticate} updateUsername={updateUsername} />
+        <NotesPage username={username} token={token} /> :
+        <Login authenticate={authenticate} updateUsername={updateUsername} setToken={setToken} />
       }
     </View>
   )

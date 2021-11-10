@@ -5,11 +5,11 @@ import DisplayNote from './DisplayNote';
 import * as API from "../API.js";
 import * as Location from 'expo-location';
 
-const NotesPage = ({ username }) => {
+const NotesPage = ({ username, token }) => {
     const [notes, setNotes] = useState([])
 
     const getNotes = () => {
-        API.getNotes().then((notes) => {
+        API.getNotes(token).then((notes) => {
             setNotes(notes)
         })
     }
@@ -20,7 +20,7 @@ const NotesPage = ({ username }) => {
 
     useEffect(() => {
         let mounted = true;
-        API.getNotes()
+        API.getNotes(token)
             .then((notes) => {
                 if (mounted) {
                     setNotes(notes)
@@ -52,6 +52,7 @@ const NotesPage = ({ username }) => {
                 <CreateNote
                     username={username}
                     refreshNotes={refreshNotes}
+                    token={token}
                 />
             </View>
         </View>

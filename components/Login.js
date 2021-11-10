@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Text, View, TextInput, Button } from 'react-native';
 import * as API from "../API.js";
 
-const Login = ({ authenticate, updateUsername }) => {
+const Login = ({ authenticate, updateUsername, setToken }) => {
 
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
@@ -13,7 +13,8 @@ const Login = ({ authenticate, updateUsername }) => {
             username,
             password
         )
-            .then(data => {
+            .then(token => {
+                setToken(token)
                 authenticate(true)
                 updateUsername(username)
             })
